@@ -1,22 +1,58 @@
-import { Heading } from "./components/Heading";
+import { Container } from './components/Container';
+import { Logo } from './components/Logo';
 
-import "./assets/theme.css";
-import "./assets/global.css";
+import './styles/theme.css';
+import './styles/global.css';
+import { Menu } from './components/Menu';
+import { CountDown } from './components/CountDown';
+import { DefaultInput } from './components/DefaultInput';
+import { Cycles } from './components/Cycles';
 
-function App() {
-  console.log("Oi");
-
+export function App() {
   return (
     <>
-      <Heading />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
-        mollitia quaerat at odio totam laboriosam nobis? Accusamus possimus
-        explicabo iusto sequi rem quaerat cupiditate consequatur? Similique,
-        deserunt. Cum, ea eum?
-      </p>
+      <Container>
+        <Logo />
+      </Container>
+
+      <Container>
+        <Menu />
+      </Container>
+
+      <Container>
+        <CountDown />
+      </Container>
+
+      <Container>
+        <form className='form' action=''>
+          <div className='formRow'>
+            <DefaultInput
+              id='input'
+              type='text'
+              placeholder='Digite algo...'
+              labelText='Qualquer Coisa'
+              // defaultValue='Valor Preenchido'
+              //required
+              // disabled
+            />
+          </div>
+
+          <div className='formRow'>
+            <p>Lorem ipsum dolor sit amet.</p>
+          </div>
+
+          <div className='formRow'>
+            <Cycles />
+            <div className='cycleDots'>
+            </div>
+          </div>
+
+          <div className='formRow'>
+            <button type='submit'>Enviar</button>
+          </div>
+        </form>
+      </Container>
     </>
   );
 }
-
 export default App;
