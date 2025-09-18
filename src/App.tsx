@@ -7,10 +7,31 @@ import { Menu } from './components/Menu';
 import { CountDown } from './components/CountDown';
 import { DefaultInput } from './components/DefaultInput';
 import { Cycles } from './components/Cycles';
+import { DefaultButton } from './components/DefaultButton';
+import { PlayCircleIcon } from 'lucide-react';
+import { Footer } from './components/Footer';
+// import { Heading } from './components/Heading';
+// import { useState } from 'react';
 
 export function App() {
+  //Objetivo: Que todos os componentes reflitam a mudança do número.
+
+  //Sempre que for usado useState nao sera usada atribuicao de valor direta.
+  // const [numero, setNumero] = useState(() => {
+  //   console.log('Lasy initialization');
+  //   return 0;
+  // });
+  // const [numero, setNumero] = useState(0);
+
+  // function handleClick() {
+  //   // setNumero(prevState => prevState + 1);
+  //   setNumero(1);
+  // }
   return (
     <>
+      {/* <Heading>Numero: {numero}</Heading>
+      <button onClick={handleClick}>Aumenta</button> */}
+
       <Container>
         <Logo />
       </Container>
@@ -30,7 +51,7 @@ export function App() {
               id='input'
               type='text'
               placeholder='Digite algo...'
-              labelText='Qualquer Coisa'
+              labelText='task'
               // defaultValue='Valor Preenchido'
               //required
               // disabled
@@ -43,14 +64,17 @@ export function App() {
 
           <div className='formRow'>
             <Cycles />
-            <div className='cycleDots'>
-            </div>
+            <div className='cycleDots'></div>
           </div>
 
           <div className='formRow'>
-            <button type='submit'>Enviar</button>
+            <DefaultButton icon={<PlayCircleIcon />} />
           </div>
         </form>
+      </Container>
+
+      <Container>
+        <Footer />
       </Container>
     </>
   );
