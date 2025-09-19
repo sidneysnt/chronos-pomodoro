@@ -1,11 +1,10 @@
 import {
-  HouseIcon,
   HistoryIcon,
+  HouseIcon,
+  MoonIcon,
   SettingsIcon,
   SunIcon,
-  MoonIcon,
 } from 'lucide-react';
-
 import styles from './styles.module.css';
 import { useState, useEffect } from 'react';
 
@@ -13,52 +12,43 @@ type AvailableThemes = 'dark' | 'light';
 
 export function Menu() {
   const [theme, setTheme] = useState<AvailableThemes>(() => {
-    const savedTheme = localStorage.getItem('theme') as AvailableThemes;
-    return savedTheme || 'dark';
+    const storageTheme =
+      (localStorage.getItem('theme') as AvailableThemes) || 'dark';
+    return storageTheme;
   });
-
-  function handleThemeChange(
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  ) {
-    event.preventDefault(); //Nao segue o link (nao navega)
-    setTheme(prevTheme => {
-      const nextTheme = prevTheme === 'dark' ? 'light' : 'dark';
-      return nextTheme;
-    });
-    // document.documentElement.setAttributes(' data-theme', theme);
-  }
-
-  // useEffect(() => {
-  //   console.log('userEffect sem dependencia', Date.now());
-  // }); //Executado toda vez que o componente renderiza na tela.
-
-  // useEffect(() => {
-  //   console.log('userEffect c/array de dependencias vazio', Date.now());
-  // }, []); //Executado apenas uma vez quando o componente for montado pela primeira vez.
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    return () => {
-      console.log('Olha, este componente sera atualizado - Clean up');
-    };
-  }, [theme]); // Executa apenas quando o valor de 'theme' mudar.
 
   const nextThemeIcon = {
     dark: <SunIcon />,
     light: <MoonIcon />,
   };
 
+  function handleThemeChange(
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) {
+    event.preventDefault();
+
+    setTheme(prevTheme => {
+      const nextTheme = prevTheme === 'dark' ? 'light' : 'dark';
+      return nextTheme;
+    });
+  }
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   return (
     <nav className={styles.menu}>
       <a
         className={styles.menuLink}
         href='#'
-        aria-label='Ir para Home'
-        title='Ir para Home'
+        aria-label='Ir para a Home'
+        title='Ir para a Home'
       >
         <HouseIcon />
       </a>
+
       <a
         className={styles.menuLink}
         href='#'
@@ -67,6 +57,7 @@ export function Menu() {
       >
         <HistoryIcon />
       </a>
+
       <a
         className={styles.menuLink}
         href='#'
@@ -75,6 +66,7 @@ export function Menu() {
       >
         <SettingsIcon />
       </a>
+
       <a
         className={styles.menuLink}
         href='#'
